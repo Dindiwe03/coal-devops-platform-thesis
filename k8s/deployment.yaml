@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coal-monitor
+  namespace: coal-devops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: coal-monitor
+  template:
+    metadata:
+      labels:
+        app: coal-monitor
+    spec:
+      containers:
+        - name: app
+          image: coal-monitor:1.0
+          ports:
+            - containerPort: 8000
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"

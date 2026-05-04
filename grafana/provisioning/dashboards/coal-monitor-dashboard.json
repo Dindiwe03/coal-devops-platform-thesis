@@ -1,0 +1,55 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Coal Monitor Pods Status",
+      "datasource": "Prometheus",
+      "targets": [
+        {"expr": "up{job=\"coal-monitor\"}", "refId": "A"}
+      ],
+      "gridPos": {"x":0,"y":0,"w":6,"h":4}
+    },
+    {
+      "type": "stat",
+      "title": "Coal Monitor CPU Usage (cores)",
+      "datasource": "Prometheus",
+      "targets": [
+        {"expr": "rate(process_cpu_seconds_total{job=\"coal-monitor\"}[1m])", "refId": "A"}
+      ],
+      "gridPos": {"x":6,"y":0,"w":6,"h":4}
+    },
+    {
+      "type": "stat",
+      "title": "Coal Monitor Memory Usage (MB)",
+      "datasource": "Prometheus",
+      "targets": [
+        {"expr": "process_resident_memory_bytes{job=\"coal-monitor\"} / 1024 / 1024", "refId": "A"}
+      ],
+      "gridPos": {"x":0,"y":4,"w":6,"h":4}
+    },
+    {
+      "type": "stat",
+      "title": "Coal Monitor Virtual Memory (MB)",
+      "datasource": "Prometheus",
+      "targets": [
+        {"expr": "process_virtual_memory_bytes{job=\"coal-monitor\"} / 1024 / 1024", "refId": "A"}
+      ],
+      "gridPos": {"x":6,"y":4,"w":6,"h":4}
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": ["coal-monitor"],
+  "templating": {"list": []},
+  "time": {"from": "now-1h","to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Coal Monitor Dashboard",
+  "version": 2
+}
